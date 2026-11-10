@@ -40,9 +40,11 @@ app.get("/lessons", async function (req, res) {
   res.send(results);
 });
 
-app.post("/orders", (req, res) => {
+app.post("/orders", async function(req, res) {
   console.log("New order received: ", req.body);
-  res.status(200).json({ message: "Order placed!" });
+  let collection = await db.collection("Orders");
+  let result = await collection.insertOne(req.body);
+  res.send(result);
 });
 
 //Unrecognised request
