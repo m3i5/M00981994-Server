@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
 //MONGO DB
@@ -40,11 +40,23 @@ app.get("/lessons", async function (req, res) {
   res.send(results);
 });
 
-app.post("/orders", async function(req, res) {
+app.post("/orders", async function (req, res) {
   console.log("New order received: ", req.body);
   let collection = await db.collection("Orders");
   let result = await collection.insertOne(req.body);
   res.send(result);
+});
+
+app.put("/lessons/:_id", async function (req, res) {
+  let collection = await db.collection("Lessons");
+  let tempid = req.params._id;
+
+  const query = { _id: new ObjectId(tempid) };
+  const updates = { $set: req.body };
+
+  result = await collection.updateOne(query, updates);
+  res.send(result);
+  console.log(result);
 });
 
 //Unrecognised request
