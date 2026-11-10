@@ -5,6 +5,7 @@ const path = require("path");
 const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
+const port = process.env.PORT || 3000;
 //MONGO DB
 
 const uri =
@@ -65,8 +66,8 @@ app.use(function (req, res) {
 });
 
 //Starting the server
-app.listen(3000, function () {
-  console.log("App started on port 3000");
+app.listen(port, function () {
+  console.log("App started on port" + port);
 });
 
 let lessons = [
