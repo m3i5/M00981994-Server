@@ -62,7 +62,7 @@ app.put("/lessons/:_id", async function (req, res) {
 
 app.delete("/orders/:_id", async function(req, res) {
   const query = { _id: new ObjectId(req.params._id) };
-  const collection = db.collection("orders");
+  const collection = db.collection("Orders");
   let result = await collection.deleteOne(query);
   console.log(result);
   res.send(result).status(200);
