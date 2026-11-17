@@ -60,6 +60,14 @@ app.put("/lessons/:_id", async function (req, res) {
   console.log(result);
 });
 
+app.delete("/orders/:id", async function(req, res) {
+  const query = { _id: new ObjectId(req.params.id) };
+  const collection = db.collection("orders");
+  let result = await collection.deleteOne(query);
+  console.log(result);
+  res.send(result).status(200);
+})
+
 //Unrecognised request
 app.use(function (req, res) {
   res.status(404).send("404: Not Found");
