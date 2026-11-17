@@ -60,7 +60,7 @@ app.put("/lessons/:_id", async function (req, res) {
   console.log(result);
 });
 
-app.delete("/orders/:id", async function(req, res) {
+app.delete("/orders/:_id", async function(req, res) {
   const query = { _id: new ObjectId(req.params.id) };
   const collection = db.collection("orders");
   let result = await collection.deleteOne(query);
